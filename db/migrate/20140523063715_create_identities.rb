@@ -7,6 +7,7 @@ class CreateIdentities < ActiveRecord::Migration
       t.string :nickname
       t.string :token
       t.string :secret
+      t.string :name
 
       t.timestamps
     end
