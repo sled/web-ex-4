@@ -1,0 +1,29 @@
+namespace :provision do
+
+  task :upstart do
+    invoke 'provision:upstart:puma'
+  end
+
+  namespace :upstart do
+    task :puma do
+      on roles :app do
+        filename = "#{fetch(:application)}-puma.conf"
+        puma_conf = File.read(File.expand_path('../../../etc/puma-upstart.conf.erb', __FILE__))
+
+        upload! StringIO.new(ERB.new(puma_conf).result(binding)), "#{fetch(:tmp_dir)}/#{filename}"
+        sudo "mv", "#{fetch(:tmp_dir)}/#{filename}", "/etc/init/#{filename}"
+        sudo "chmod", "0644", "/etc/init/#{filename}"
+      end
+    end
+
+    task :'puma-restart' do
+      on roles(:app), in: :sequence, wait: 5 do
+        if test "[ -f #{fetch(:deploy_to)}/shared/tmp/pids/puma.pid ]"
+          sudo "restart", "#{fetch(:application)}-puma"
+        else
+          sudo "start", "#{fetch(:application)}-puma"
+        end
+      end
+    end
+  end
+end

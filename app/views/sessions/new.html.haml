@@ -1,0 +1,12 @@
+.sign-in#clearance
+  .panel.panel-default
+    .panel-heading.clearfix
+      %h3.panel-title.pull-left= t '.title'
+      .btn-group.pull-right
+        = link_to t('.sign_up'), sign_up_path, class: 'btn btn-success btn-xs'
+    .panel-body
+      = render partial: 'layouts/messages'
+      = render :partial => '/sessions/form'  
+
+
+

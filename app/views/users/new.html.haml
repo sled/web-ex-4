@@ -1,0 +1,12 @@
+#clearance.sign-up
+  .panel.panel-default
+    .panel-heading.clearfix
+      %h3.panel-title.pull-left= t '.title'
+      .btn-group.pull-right
+        = link_to t('.sign_in'), sign_in_path, class: 'btn btn-xs btn-success'
+    .panel-body
+      = render partial: 'layouts/messages'
+      = simple_form_for @user do |f|
+        = render :partial => '/users/form', locals: {f: f} 
+
+

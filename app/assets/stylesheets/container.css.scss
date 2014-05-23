@@ -1,0 +1,71 @@
+// import the CSS framework
+@import "bootstrap";
+@import 'common/all';
+
+#clearance.sign-in,
+#clearance.sign-up,
+#clearance.password-reset {
+  @extend .col-md-4;
+  @extend .col-md-offset-4;
+}
+
+#image-search-results li.result {
+  margin-bottom: $grid-gutter-width/2;
+  margin-top: $grid-gutter-width/2;
+  cursor: pointer;
+}
+
+a.selected-img {
+  text-align: center;
+  img {
+    width: 150px;
+    height: 150px;
+  }
+}
+
+
+#group-inner {
+  @extend .col-md-12;
+
+  background: white;
+  padding-top: $grid-gutter-width/2;
+
+  border-left: 1px solid #DDDDDD;
+  border-right: 1px solid #DDDDDD;
+  border-bottom: 1px solid #DDDDDD;
+
+  min-height: 400px;
+}
+
+.group-teaser {
+  @extend .clearfix;
+  display: block;
+
+  background: white;
+  border: 1px solid #DDDDDD;
+  padding: $grid-gutter-width/2;
+  margin: $grid-gutter-width/2 0;
+  > .thumb {
+    float: left;
+    max-width: 160px;
+  }
+  > .info {
+    margin-left: 160px + 20px;
+  }
+  h3 {
+    margin-top: 0;
+  }
+}
+
+a.group-teaser {
+  color: inherit;
+    // Hover state
+  &:hover,
+  &:focus {
+    text-decoration: none;
+    color: $list-group-link-hover-color;
+    background-color: $list-group-hover-bg;
+  }
+
+  border-radius: $border-radius-base;
+}

@@ -1,0 +1,16 @@
+.member.col-sm-5.col-md-3{id: "member-#{member.id}", class: owner ? 'owner' : ''}
+  .thumbnail
+    = link_to profile_path(member) do 
+      = user_avatar_xl(member)
+  .caption
+    %h5
+      =member.name
+    %p.text-muted.small= member.location
+    
+    - if owner
+      %p
+        %i.glyphicon.glyphicon-star 
+        Group Owner
+    - elsif current_user.can_update?(group)
+      - if group.users.exists?(member)
+        = link_to 'Remove', toggle_group_member_path(group, member, format: :js), class: 'btn btn-danger btn-block btn-sm', remote: true, method: :post

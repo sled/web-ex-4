@@ -1,0 +1,9 @@
+= render partial: 'layouts/messages'
+.page-header
+  %h1
+    Browse User Directory
+    %small and find people for your meet up group
+%hr
+.row
+  .col-sm-12#users
+    = render User.all.order('name ASC')

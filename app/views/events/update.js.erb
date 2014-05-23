@@ -1,0 +1,5 @@
+(function($) {
+  // show form 
+  $('#event-<%= @event.id %>').replaceWith("<%= j render partial: 'event', locals: {group: @group, event: @event} %>");
+  $("#event-count-<%= @group.id %>").text('<%= @group.events.upcoming.count %>');
+})(jQuery);

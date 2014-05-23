@@ -1,0 +1,19 @@
+= render partial: 'layouts/messages'
+.page-header
+  %h1 
+    Welcome back!
+
+%h4 Your managed Groups
+.list-group
+  = render collection: current_user.groups_as_owner, partial: 'users/membership', as: :group
+  .placeholder.alert.alert-info
+    No groups found
+    = link_to new_group_path, class: 'btn btn-default btn-sm' do
+      %i.glyphicon.glyphicon-plus
+      Create one!
+
+%h4 Your affiliated Groups
+.list-group
+  = render collection: current_user.groups, partial: 'users/membership', as: :group
+  .placeholder.alert.alert-info
+    No groups found

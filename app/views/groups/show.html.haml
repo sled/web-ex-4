@@ -1,0 +1,10 @@
+= render partial: 'layouts/messages'
+= render partial: 'header'
+
+.row
+  .col-sm-3
+    = render partial: 'sidenav'
+  .col-sm-9#events
+    = render partial: 'events/new_event_panel', locals: {group: @group}
+    = render @group.events.upcoming.by_popularity
+    = render @group.events.finished

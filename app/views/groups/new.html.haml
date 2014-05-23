@@ -1,0 +1,8 @@
+.panel.panel-default
+  .panel-heading.clearfix
+    %h3.panel-title.pull-left New MeetUp Group
+  .panel-body
+    = simple_form_for @group do |f|
+      = render :partial => 'form', locals: {f: f} 
+
+

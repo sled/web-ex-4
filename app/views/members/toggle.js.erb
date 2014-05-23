@@ -1,0 +1,12 @@
+(function($) {
+  // show form 
+  $('#member-<%= @member.id %>').remove();
+
+  <% if @group.users.exists?(@member) %>
+    $('#toggle-<%= @group.id %>-<%= @member.id %>').removeClass('notamember').addClass('isamember');
+  <% else %>
+    $('#toggle-<%= @group.id %>-<%= @member.id %>').addClass('notamember').removeClass('isamember');
+  <% end %>
+
+  $('#member-count-<%= @group.id %>').text('<%= @group.users.count + 1 %>');
+})(jQuery);

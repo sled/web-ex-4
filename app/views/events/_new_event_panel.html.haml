@@ -1,0 +1,9 @@
+.panel.panel-default#new-event-panel
+  .panel-heading
+    %h4.panel-title
+      %a{href: '#new-event-panel-collapse', data: {toggle: 'collapse'}}
+        %i.glyphicon.glyphicon-plus
+        Create New Event
+  .panel-collapse.collapse.out#new-event-panel-collapse
+    .panel-body
+      = render partial: 'events/form', locals: {group: group, event: group.events.build}

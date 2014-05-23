@@ -1,0 +1,43 @@
+namespace :provision do
+  task :nginx do
+    invoke 'provision:nginx:upload'
+    invoke 'provision:nginx:enable'
+    invoke 'provision:nginx:reload'
+  end
+
+  namespace :nginx do
+    task :upload do
+      on roles :web do
+        filename = "#{fetch(:server_name)}.conf"
+        nginx_conf = File.read(File.expand_path('../../../etc/nginx-vhost.conf.erb', __FILE__))
+
+        upload! StringIO.new(ERB.new(nginx_conf).result(binding)), "#{fetch(:tmp_dir)}/#{filename}"
+        sudo "mv", "#{fetch(:tmp_dir)}/#{filename}", "/etc/nginx/sites-available/#{filename}"
+        sudo "chmod", "0644", "/etc/nginx/sites-available/#{filename}"
+      end
+    end
+
+    task :enable => 'provision:nginx:disable' do
+      on roles :web do
+        filename = "#{fetch(:server_name)}.conf"
+        sudo "ln", "-s", "/etc/nginx/sites-available/#{filename}", "/etc/nginx/sites-enabled/#{filename}"
+      end
+    end
+
+    task :disable do
+      on roles :web do
+        filename = "#{fetch(:server_name)}.conf"
+        sudo <<-CMD
+          [ -f /etc/nginx/sites-enabled/#{filename} ] && sudo rm /etc/nginx/sites-enabled/#{filename};
+          exit 0
+        CMD
+      end
+    end
+
+    task :reload do
+      on roles :web do
+        sudo "/etc/init.d/nginx", "reload"
+      end
+    end
+  end
+end

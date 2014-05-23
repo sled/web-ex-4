@@ -1,0 +1,2 @@
+FlickRaw.api_key=Rails.application.config.flickr_api_key
+FlickRaw.shared_secret=Rails.application.config.flickr_shared_secret

@@ -1,0 +1,12 @@
+= simple_form_for :flickr, url: search_flickr_url, html: {class: 'form-horizontal', id: 'image-search-form'}, remote: true, method: :get do |f|
+  .container-fluid
+    .row
+      .col-md-9
+        = f.input :q, label: false
+      .col-md-3
+        = f.button :submit, 'Search', class: 'btn-block', data: {loading_text: "Searching..."}
+    %hr
+    
+    %ul.list-unstyled.row#image-search-results
+
+

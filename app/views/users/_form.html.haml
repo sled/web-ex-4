@@ -1,0 +1,5 @@
+= f.input :name
+= f.input :location, label: 'Where are you from?'
+= f.input :email
+= f.input :password, label: @user.persisted? ? 'New Password' : 'Password', required: @user.new_record?
+= f.button :submit, class: 'btn-success'

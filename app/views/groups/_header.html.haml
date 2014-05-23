@@ -1,0 +1,7 @@
+.jumbotron
+  %h3
+    = @group.name
+    %small= @group.hometown
+  %p.text-muted
+    \- Est. by #{@group.owner_name} on #{I18n.l @group.created_at, format: :long}
+

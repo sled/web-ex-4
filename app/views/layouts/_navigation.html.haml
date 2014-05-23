@@ -1,0 +1,16 @@
+%nav.navbar.navbar-default.navbar-fixed-top
+  .container
+    .navbar-header
+      %button.navbar-toggle{type: "button", data: { toggle: "collapse", target: '#navbar-main'}}
+        %span.sr-only Toggle navigation
+        %span.icon-bar 
+        %span.icon-bar
+        %span.icon-bar
+
+      = link_to root_path, class: 'navbar-brand' do
+        %span.meet> Meet 
+        %span.up Up
+
+    .collapse.navbar-collapse#navbar-main
+      = render "layouts/navigation_links_#{signed_in? ? 'secure' : 'public'}"
+

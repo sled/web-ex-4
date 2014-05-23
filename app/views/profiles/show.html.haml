@@ -1,0 +1,30 @@
+= render partial: 'layouts/messages'
+.page-header
+  %h1.clearfix{style: 'line-height: 64px;'}
+    .pull-left.thumbnail{style: 'margin-right: 15px;'}
+      = user_avatar_lg_square(@profile)
+    = @profile.name
+    %small= @profile.location
+
+%h4= "Add #{@profile.name} to one of your Groups"
+.row
+  = render collection: current_user.groups_as_owner, partial: 'toggle_link', as: :group, locals: {member: @profile}
+  .col-sm-12.placeholder
+    .alert.alert-info.col-sm-12
+      Whoops... you do not own any group yet...
+      = link_to new_group_path, class: 'btn btn-default btn-sm' do
+        %i.glyphicon.glyphicon-plus
+        Create one!
+
+
+%h4= "#{@profile.name}'s Managed Groups"
+.list-group
+  = render collection: @profile.groups_as_owner, partial: 'users/membership', as: :group
+  .placeholder.alert.alert-info
+    #{@profile.name} manages no groups at the moment
+
+%h4= "#{@profile.name}'s Affiliated Groups"
+.list-group
+  = render collection: @profile.groups, partial: 'users/membership', as: :group
+  .placeholder.alert.alert-info
+    #{@profile.name} has not joined any groups

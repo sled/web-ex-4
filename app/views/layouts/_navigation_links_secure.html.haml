@@ -1,0 +1,39 @@
+%ul.nav.navbar-nav
+  %li{class: (controller_name=='users' && action_name=='show') ? 'active' : ''}
+    = link_to root_path do 
+      %i.glyphicon.glyphicon-home
+      Home
+  %li{class: (controller_name=='profiles') ? 'active' : ''}
+    = link_to profiles_path do 
+      %i.glyphicon.glyphicon-user
+      Community
+  %li{class: (controller_name=='groups' && ['new', 'create'].include?(action_name)) ? 'active' : ''}
+    = link_to new_group_path do
+      %i.glyphicon.glyphicon-asterisk
+      New Group
+  - if current_user.identities.twitter.count > 0
+    %li
+      %p.navbar-text 
+        %i.glyphicon.glyphicon-lock
+        Twitter Enabled
+  - else
+    %li
+      = link_to '/auth/twitter', class: 'navbar-link' do
+        %i.glyphicon.glyphicon-bullhorn
+        Enable Twitter
+        
+%ul.nav.navbar-nav.navbar-right
+  %li.dropdown
+    %a.dropdown-toggle{href: '#', data: {toggle: 'dropdown'}} 
+      = user_avatar_xs(current_user)
+      = current_user.name
+      %b.caret
+    %ul.dropdown-menu
+      %li
+        = link_to edit_account_path do 
+          %i.glyphicon.glyphicon-cog
+          Settings
+      %li
+        = link_to sign_out_path, method: :delete do
+          %i.glyphicon.glyphicon-log-out
+          Log Out

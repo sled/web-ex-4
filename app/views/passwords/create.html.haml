@@ -1,0 +1,8 @@
+.password-reset#clearance
+  .panel.panel-default
+    .panel-heading.clearfix
+      %h3.panel-title.pull-left Password Reset
+      .btn-group.pull-right
+        = link_to t('.sign_in'), sign_in_path, class: 'btn btn-success btn-xs'
+    .panel-body
+      %p= t '.description'

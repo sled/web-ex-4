@@ -1,0 +1,12 @@
+.password-reset#clearance
+  .panel.panel-default
+    .panel-heading.clearfix
+      %h3.panel-title.pull-left= t '.title'
+      .btn-group.pull-right
+        = link_to t('.sign_in'), sign_in_path, class: 'btn btn-success btn-xs'
+    .panel-body
+      = render partial: 'layouts/messages'
+      %p= t '.description'
+      = simple_form_for :password, url: passwords_path do |f|
+        = f.input :email, as: :email
+        = f.button :submit

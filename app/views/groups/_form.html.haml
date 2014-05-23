@@ -1,0 +1,10 @@
+= f.input :name
+= f.input :hometown
+
+- if @group.new_record?
+  = f.association :users, 
+    collection: User.without(current_user),
+    wrapper: :vertical_radio_and_checkboxes,
+    as: :check_boxes
+
+= f.button :submit

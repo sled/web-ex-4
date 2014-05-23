@@ -1,0 +1,3 @@
+- @results.each do |result|
+  %li.result.col-md-3{data: {photo_id: result["id"]}}
+    = flickr_thumb_tag result['id']

@@ -1,0 +1,10 @@
+= render partial: 'layouts/messages'
+= render partial: 'groups/header'
+
+.row
+  .col-sm-3
+    = render partial: 'groups/sidenav'
+  .col-sm-9#members
+    .row
+      = render partial: 'member', locals: {member: @group.owner, owner: true, group: @group}
+      = render collection: @group.users.order('name ASC'), partial: 'member', locals: {group: @group, owner: false}

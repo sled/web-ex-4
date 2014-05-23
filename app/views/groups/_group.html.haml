@@ -1,0 +1,11 @@
+%a.group-teaser{href: group_path(group), id: "group-#{group.id}"}
+  .thumb
+    = group_thumb_tag group
+    = flickr_author_tag(group.photo_author, nil)
+  .info
+    %h3
+      = group.name
+      %small= group.hometown
+    %blockquote
+      %p= group.description
+      %footer= group.owner_name  

@@ -1,0 +1,16 @@
+= simple_form_for [group, event], remote: true, format: :js, autocomplete: 'off' do |f|
+  %fieldset.blubb
+    = f.input :name
+    = f.input :location
+    .row
+      .col-sm-6
+        = f.input :start_date, as: :datetime_picker
+      .col-sm-6
+        = f.input :duration
+    .row
+      .col-sm-9
+        = f.input :description
+      .col-sm-3
+        = f.input :photo, as: :flickr_photo
+  
+    = f.button :submit, data: {loading_text: 'Loading...'}

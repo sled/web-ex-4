@@ -1,0 +1,9 @@
+.col-sm-5.col-md-3{style: 'margin-bottom: 15px; font-size: 1em;'}
+  = link_to toggle_group_member_path(group, member, format: :js), 
+    id: "toggle-#{group.id}-#{member.id}",
+    class: "toggle-link #{group.users.exists?(member) ? 'isamember' : 'notamember'}",
+    remote: true, 
+    method: :post do
+    %i.glyphicon.glyphicon-plus-sign
+    %i.glyphicon.glyphicon-minus-sign
+    = group.name

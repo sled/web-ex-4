@@ -1,0 +1,8 @@
+#clearance.sign-up
+  .panel.panel-default
+    .panel-heading.clearfix
+      %h3.panel-title.pull-left Your Account
+    .panel-body
+      = render partial: 'layouts/messages'
+      = simple_form_for @user, url: account_path, method: :put do |f|
+        = render :partial => '/users/form', locals: {f: f} 

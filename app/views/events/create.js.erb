@@ -1,0 +1,8 @@
+(function($) {
+  // insert new event
+  $('#new-event-panel').replaceWith("<%= j render partial: 'event', locals: {group: @group, event: @event} %>");
+  // new form
+  $('#events').prepend("<%= j render partial: 'new_event_panel', locals: {group: @group} %>");
+
+  $("#event-count-<%= @group.id %>").text('<%= @group.events.upcoming.count %>');
+})(jQuery);

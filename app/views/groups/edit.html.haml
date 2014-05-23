@@ -1,0 +1,13 @@
+= render partial: 'layouts/messages'
+= render partial: 'header'
+
+.row
+  .col-sm-3
+    = render partial: 'sidenav'
+  .col-sm-9#group-settings
+    .panel.panel-default
+      .panel-heading
+        %h4.panel-title Edit Group 
+      .panel-body
+        = simple_form_for @group do |f|
+          = render :partial => 'form', locals: {f: f} 

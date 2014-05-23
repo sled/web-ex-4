@@ -1,0 +1,35 @@
+#!upstart
+
+# Starts the puma worker for <%= fetch(:application) %>
+description "<%= fetch(:application) %>-puma: ruby app server [<%= fetch(:stage) %>]"
+
+# Ensure filesystem and network is present
+start on filesystem and started networking
+stop on shutdown
+
+# Common environment variables
+env APP_ROOT=<%= "#{fetch(:deploy_to)}/current" %>
+env RAILS_ENV=<%= fetch(:rails_env) %>
+env PUMA_PID=<%= "#{fetch(:deploy_to)}/shared/tmp/pids/puma.pid" %>
+
+# Run as
+setuid <%= fetch(:user) %>
+setgid <%= fetch(:group) || fetch(:user) %>
+
+# Automatically restart on error
+respawn
+respawn limit 3 30
+
+# Use APP_ROOT as working directory, so no need to `cd`
+chdir <%= "#{fetch(:deploy_to)}/current" %>
+
+# Export other .env variables before starting puma
+script
+  echo $$ > $PUMA_PID
+  exec ./bin/puma --environment <%= fetch(:rails_env) %> --config ./config/puma/<%= fetch(:stage) %>.rb >> ./log/puma.log 2>&1
+end script
+
+# Clean PID after stopping
+post-stop script
+  [ -f $PUMA_PID ] && rm $PUMA_PID
+end script

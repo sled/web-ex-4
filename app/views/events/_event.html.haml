@@ -1,0 +1,36 @@
+.panel.panel-default.event{id: "event-#{event.id}"}
+  .panel-heading
+    %h3.panel-title.clearfix
+      - if current_user.can_update?(event.group)
+        .pull-right
+          .btn-group
+            - if !event.finished? && !event.confirmed?
+              = link_to confirm_group_event_path(event.group, event, format: :js), class: 'btn btn-success btn-xs', remote: true, method: :put do
+                %i.glyphicon.glyphicon-bullhorn
+                Confirm
+            = link_to edit_group_event_path(event.group, event, format: :js), class: 'btn btn-default btn-xs', remote: true do
+              %i.glyphicon.glyphicon-pencil
+              Edit
+
+      - if event.confirmed?
+        %span.label.label.label-success Confirmed
+      - elsif event.upcoming?
+        %span.label.label.label-primary Upcoming
+      - elsif event.finished?
+        %span.label.label.label-default Finished
+      = event.name
+  .panel-body.clearfix
+    .pull-right.thumb
+      = event_thumb_tag event
+      = flickr_author_tag(event.photo_author, event.photo_profile_url)
+
+    %ul.list-unstyled.text-muted.small.event-attributes
+      %li
+        %i.glyphicon.glyphicon-map-marker 
+        = event.location
+      %li
+        %i.glyphicon.glyphicon-time
+        = I18n.l event.start_date, format: :long
+      %li
+        = render partial: 'events/votes', locals: {event: event}
+    %p= event.description

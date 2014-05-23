@@ -1,0 +1,8 @@
+.user.col-sm-5.col-md-3{id: "user-#{user.id}"}
+  .thumbnail
+    = link_to profile_path(user) do 
+      = user_avatar_xl(user)
+  .caption
+    %h5
+      =user.name
+    %p.text-muted.small= user.location

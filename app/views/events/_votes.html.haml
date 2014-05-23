@@ -1,0 +1,8 @@
+%span{id: "event-#{event.id}-likes"}
+  %i.glyphicon.glyphicon-thumbs-up
+  = t('.vote_count_html', count: event.users.count).html_safe
+  - if event.users.exists?(current_user)
+    You like this! 
+    = link_to t('.changed_mind'), like_group_event_path(event.group, event, format: :js), remote: true, method: :put
+  - else
+    = link_to t('.like_this'), like_group_event_path(event.group, event, format: :js), remote: true, method: :put
