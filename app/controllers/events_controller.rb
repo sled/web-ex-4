@@ -54,6 +54,11 @@ class EventsController < ApplicationController
   def confirm 
     authorize_action_for current_group  
     current_event.update_attribute(:confirmed_at, Time.now)  
+    current_user.tweet(I18n.t('events.tweet_confirmed', 
+      name: current_event.name, 
+      start_date: I18n.l(current_event.start_date, format: :long), 
+      location: current_event.location))
+
     respond_to do |format|
       format.js { render action: 'update' }
     end

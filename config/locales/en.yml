@@ -29,3 +29,4 @@ en:
         zero: '<strong>Nobody</strong> likes this.'
         one: '<strong>Someone</strong> likes this.'
         other: '<strong>%{count}</strong> People like this.'
+    tweet_confirmed: "Confirmed: %{name} - %{start_date} @ %{location}"
