@@ -1,16 +1,10 @@
 set :application, 'meetup'
-#set :repo_url, 'git@github.com:at-point/lendit.git'
+set :repo_url, 'git@github.com:sled/web-ex-4.git'
 
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
 set :deploy_to, -> { "/u/apps/#{fetch(:application)}" }
-
-set :repository, '.'
-set :local_repository, '.'
-set :branch, 'master'
-set :check_revision, false
-set :deploy_via, :copy
 set :scm, :git
-#set :scm, :git
+
 
 # set :format, :pretty
 # set :log_level, :debug
