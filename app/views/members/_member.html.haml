@@ -14,3 +14,5 @@
     - elsif current_user.can_update?(group)
       - if group.users.exists?(member)
         = link_to 'Remove', toggle_group_member_path(group, member, format: :js), class: 'btn btn-danger btn-block btn-sm', remote: true, method: :post
+    - else
+      %p &nbsp;
